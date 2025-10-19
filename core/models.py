@@ -20,6 +20,7 @@ class Skills(models.Model):
 class SettingsConfig(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
     sub_title = models.CharField(max_length=500, blank=True, null=True)
+    call = models.CharField(max_length=14, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     icon = models.ImageField(upload_to='site/', blank=True, null=True, default='default/site_icon.png')
     logo = models.ImageField(upload_to='site/', blank=True, null=True, default='default/site_logo.png')
