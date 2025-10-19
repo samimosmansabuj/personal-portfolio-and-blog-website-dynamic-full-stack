@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('core.urls')),
     path('', include('blog.urls')),
     path('', include('about_me.urls')),
+    path('', include('team_member.urls')),
 ]
 
 SERVE_MEDIA = os.getenv("SERVE_MEDIA", "False").strip().lower() in ("true","1","yes")

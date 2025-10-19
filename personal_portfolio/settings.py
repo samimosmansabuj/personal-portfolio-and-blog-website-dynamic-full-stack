@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Custom App----
-    'about_me', 'blog', 'core'
+    'about_me', 'blog', 'core', 'team_member'
 ]
 
 MIDDLEWARE = [
