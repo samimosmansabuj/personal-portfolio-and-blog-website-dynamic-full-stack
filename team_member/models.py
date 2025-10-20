@@ -79,10 +79,12 @@ class TeamMember(models.Model):
     def image_update(self, instance):
         previous_image_delete_os(instance.image, self.image)
         previous_image_delete_os(instance.cover_image, self.cover_image)
+        previous_image_delete_os(instance.cv, self.cv)
 
     def delete(self, *args, **kwargs):
         image_delete_os(self.image)
         image_delete_os(self.cover_image)
+        image_delete_os(self.cv)
         return super().delete(*args, **kwargs)
 
     def save(self, *args, **kwargs):

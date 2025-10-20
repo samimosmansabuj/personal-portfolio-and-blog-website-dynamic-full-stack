@@ -7,8 +7,9 @@
 
 {% block main_content %}
 <!-- section begin -->
-<section id="section-home" aria-label="section" class="full-height no-top no-bottom text-light"
-    data-bgimage="url({% static 'assets-jonna/images/background/1.jpg' %})">
+<!-- <section id="section-home" aria-label="section" class="full-height no-top no-bottom text-light" data-bgimage="url({% static 'assets-jonna/images/background/1.jpg' %})"> -->
+<!-- <section id="section-home" aria-label="section" class="full-height no-top no-bottom text-light" data-bgimage="url({% static 'assets-jonna/images/background/2.jpg' %})"></section> -->
+<section id="section-home" aria-label="section" class="full-height no-top no-bottom text-light" data-bgimage="url({{ about_me.person.cover_image.url }})">
     <div class="overlay-bg t50">
         <div class="middle">
             <div class="container">
@@ -19,9 +20,9 @@
                         <div class="h1_big">My name {{ website_settings.title }}, a
                             <br> USA based
                             <div class="typed-strings">
-                                <p>Programmer</p>
-                                <p>Designer</p>
-                                <p>Digitial Marketer</p>
+                                {% for slider_tag in about_me.slider_tags.all %}
+                                <p>{{ slider_tag.title }}</p>
+                                {% endfor %}
                             </div>
                             <div class="typed"></div>
                         </div>

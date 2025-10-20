@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     {% block site_title %}
-    <title>Jonna</title>
+    <title>{{ website_settings.title }} | {{ website_settings.sub_title }}</title>
     {% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -40,7 +40,7 @@
             <div id="top-bar" class="transparent dark">
 
                 <div id="logo">
-                    <a href="{% url 'home' %}">{{ website_settings.title }}</a>
+                    <a href="{% url 'home' %}" style="text-decoration: none; color: white;">{{ website_settings.title }}</a>
                 </div>
 
                 <nav>
@@ -61,7 +61,7 @@
                 </span>
 
                 <div id="mp-col">
-                    <a href="#" class="btn-download light"><span class="id-color">
+                    <a href="{{ about_me.person.cv.url }}" class="btn-download light" target="_blank"><span class="id-color">
                         <i class="fa fa-file-pdf-o"></i></span>Download CV
                     </a>
                 </div>
@@ -81,10 +81,6 @@
                         {% for social_link in social_links %}
                         <a href="{{ social_link.url }}"><i class="fa fa-{{ social_link.platform }} fa-lg"></i></a>
                         {% endfor %}
-                        <!-- <a href="#"><i class="fa fa-instagram fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-linkedin fa-lg"></i></a>
-                        <a href="#"><i class="fa fa-envelope-o fa-lg"></i></a> -->
                     </div>
                 </div>
 

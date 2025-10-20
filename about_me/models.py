@@ -9,13 +9,20 @@ class AboutMe(models.Model):
     details_description = models.TextField(blank=True, null=True)
     resume_description = models.TextField(blank=True, null=True)
     testimonials_description = models.TextField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
 
     create_at = models.DateTimeField(auto_now=True)
     update_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self) -> str:
         return f'About Me - {self.person}'
+
+class SliderTagList(models.Model):
+    aboutme = models.ForeignKey(AboutMe, on_delete=models.CASCADE, related_name="slider_tags")
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.aboutme.person.name} - {self.title}"
 
 class Education(models.Model):
     Degree = (

@@ -5,6 +5,9 @@ from .models import TemplateSettingsConfiguration
 class HomePage(View):
     def get(self, request, *args, **kwargs):
         template_name = self.get_template_title()
+        context = {}
+
+        
         return render(request, f"{template_name}/index.html")
     
     def get_template_title(self):
