@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.views.static import serve as static_serve
+from django.conf.urls.static import static
 import os
 
 urlpatterns = [
@@ -10,7 +11,7 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('', include('about_me.urls')),
     path('', include('team_member.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 SERVE_MEDIA = os.getenv("SERVE_MEDIA", "False").strip().lower() in ("true","1","yes")
 

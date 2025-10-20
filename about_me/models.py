@@ -1,8 +1,9 @@
 from django.db import models
 from team_member.models import TeamMember
 from core.models import Skills
+from core.utils import image_delete_os, previous_image_delete_os, compress_image
 
-class About_Me(models.Model):
+class AboutMe(models.Model):
     person = models.OneToOneField(TeamMember, on_delete=models.CASCADE)
     short_description = models.TextField(blank=True, null=True)
     details_description = models.TextField(blank=True, null=True)
@@ -100,6 +101,32 @@ class MyWorkPicture(models.Model):
     is_active = models.BooleanField(default=True)
     create_at = models.DateTimeField(auto_now=True)
     update_at = models.DateTimeField(auto_now_add=True)
+
+    def get_image_optimized(self, new_image, old_image=None):
+        if new_image and new_image != old_image and hasattr(new_image, "file"):
+            return compress_image(new_image)
+        return None
+
+    def image_optimization(self, instance=None):
+        image = self.get_image_optimized(self.image, instance.image if instance is not None else None)
+        if image:
+            self.image = image
+
+    def image_update(self, instance):
+        previous_image_delete_os(instance.image, self.image)
+
+    def delete(self, *args, **kwargs):
+        image_delete_os(self.image)
+        return super().delete(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            instance = MyWorkPicture.objects.get(pk=self.pk)
+            self.image_update(instance)
+            self.image_optimization(instance)
+        else:
+            self.image_optimization()
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Picture for #{self.pk} ({self.work.title})"

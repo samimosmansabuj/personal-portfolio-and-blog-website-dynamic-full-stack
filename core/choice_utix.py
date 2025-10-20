@@ -17,3 +17,9 @@ class SocialMediaPlatform(models.TextChoices):
     LINKEDIN = "linkedin"
     GITHUB = "github"
     YOUTUBE = "youtube"
+
+class SkillStage(models.TextChoices):
+    BASIC = "Basic"
+    MEDIUM = "Medium"
+    ADVANCED = "Advanced"
+

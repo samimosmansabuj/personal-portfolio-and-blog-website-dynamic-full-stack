@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import *
 
-admin.site.register(About_Me)
+admin.site.register(AboutMe)
 admin.site.register(Education)
 admin.site.register(Certification)
 admin.site.register(Experience)
