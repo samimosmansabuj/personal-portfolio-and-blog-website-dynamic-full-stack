@@ -1,0 +1,65 @@
+{% load static %}
+<!-- section begin -->
+<section id="section-experiences" class="fluid">
+    <div class="container-fluid">
+        <div class="row-fluid table">
+            <div class="col-md-6 va-top">
+                <div class="img-fx">
+                    <img src="{% static 'assets-jonna/images/misc/2.jpg' %}" alt="">
+                    <div class="img-url"></div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="content-wrap">
+                    <p class="lead">
+                        I am a website designer from London, with a strong focus in UI/UX design. I love
+                        to get new experiences and always learn from my surroundings. I've done more
+                        than 285 projects. I looking forward to any opportunities and challenges.
+                    </p>
+
+                    <div class="spacer30"></div>
+
+                    <div class="de_tab tab_style_2">
+                        <ul class="de_nav">
+                            <li class="active">
+                                <span>Works</span>
+                            </li>
+                            <li>
+                                <span>Education</span>
+                            </li>
+                        </ul>
+
+                        <div class="de_tab_content text-left">
+
+                            <div class="tab_single_content">
+                                {% for experience in experiences %}
+                                <div class="exp-box">
+                                    <h5>{{ experience.starting_date|date }} - {% if experience.ending_date %}{{ experience.ending_date|date }}{% else %}now{% endif %}</h5>
+                                    <h4>{{ experience.designation }}</h4>
+                                    <p>{{ experience.short_description }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="tab_single_content">
+                                {% for education in educations %}
+                                <div class="exp-box">
+                                    <h5>{{ education.starting_date }}</h5>
+                                    <h4>{{ education.subject }}, {{ education.institute_name }}</h4>
+                                    <p>{{ education.institute_address }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</section>
+<!-- section close -->

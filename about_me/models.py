@@ -20,9 +20,29 @@ class AboutMe(models.Model):
 class SliderTagList(models.Model):
     aboutme = models.ForeignKey(AboutMe, on_delete=models.CASCADE, related_name="slider_tags")
     title = models.CharField(max_length=100)
+    index = models.PositiveIntegerField(default=0, blank=True, null=True)
+
+    class Meta:
+        ordering = ["index"]
 
     def __str__(self):
         return f"{self.aboutme.person.name} - {self.title}"
+
+class OurService(models.Model):
+    title = models.CharField(max_length=255)
+    picture = models.ImageField(upload_to="service/", blank=True, null=True)
+    icon = models.CharField(max_length=25, blank=True, null=True)
+    short_description = models.TextField(blank=True, null=True)
+    industry = models.CharField(max_length=255, blank=True, null=True)
+    details = models.TextField(blank=True, null=True)
+    skills = models.ManyToManyField(Skills, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_me = models.BooleanField(default=True)
+    create_at = models.DateTimeField(auto_now=True)
+    update_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
 
 class Education(models.Model):
     Degree = (
@@ -84,7 +104,7 @@ class Experience(models.Model):
     def __str__(self) -> str:
         return f'{self.company_name} - {self.designation}'
 
-class MyWork(models.Model):
+class OurWork(models.Model):
     member = models.ManyToManyField(TeamMember)
     title = models.CharField(max_length=255)
     short_description = models.TextField()
@@ -102,9 +122,9 @@ class MyWork(models.Model):
     def __str__(self):
         return self.title
 
-class MyWorkPicture(models.Model):
-    work = models.ForeignKey(MyWork, on_delete=models.CASCADE, related_name='myworkpicture')
-    image = models.ImageField(upload_to='work/me/', blank=True, null=True)
+class OurWorkPicture(models.Model):
+    work = models.ForeignKey(OurWork, on_delete=models.CASCADE, related_name='ourworkpicture')
+    image = models.ImageField(upload_to='work/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     create_at = models.DateTimeField(auto_now=True)
     update_at = models.DateTimeField(auto_now_add=True)
@@ -128,7 +148,7 @@ class MyWorkPicture(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk:
-            instance = MyWorkPicture.objects.get(pk=self.pk)
+            instance = OurWorkPicture.objects.get(pk=self.pk)
             self.image_update(instance)
             self.image_optimization(instance)
         else:

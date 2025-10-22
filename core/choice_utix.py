@@ -23,3 +23,8 @@ class SkillStage(models.TextChoices):
     MEDIUM = "Medium"
     ADVANCED = "Advanced"
 
+class CompanyLevel(models.TextChoices):
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
+

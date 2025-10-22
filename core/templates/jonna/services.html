@@ -1,0 +1,37 @@
+{% load static %}
+<!-- section begin -->
+<section id="section-services" class="fluid">
+    <div class="container-fluid">
+        <div class="row-fluid table">
+            <div class="col-md-6 va-top">
+                <div class="img-fx">
+                    <img src="{% static 'assets-jonna/images/misc/1.jpg' %}" alt="">
+                    <div class="img-url"></div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="content-wrap">
+
+                    <!-- service box begin -->
+                    {% for service in services %}
+                    <div class="feature-box mb30">
+                        <div class="inner">
+                            <div class="text">
+                                 <i class="fa fa-{{ service.icon }}" style="font-size:48px"></i>
+                                <h3>{{ service.title }}</h3> {{ service.short_description }}
+                            </div>
+                            <i class="big fa fa-{{ service.icon }}" style="font-size:200px"></i>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- service box close -->
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</section>
+<!-- section close -->

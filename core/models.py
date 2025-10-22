@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .choice_utix import SocialMediaTypeChoice, SocialMediaPlatform, SkillStage
+from .choice_utix import SocialMediaTypeChoice, SocialMediaPlatform, SkillStage, CompanyLevel
 from .utils import compress_image, previous_image_delete_os, image_delete_os
 
 class SiteSlider(models.Model):
@@ -125,4 +125,25 @@ class TemplateSettingsConfiguration(models.Model):
     def __str__(self):
         return f"Template Configurations - {self.template.title}"
 
+class CompanyIndustry(models.Model):
+    title = models.CharField(max_length=255)
+    create_at = models.DateTimeField(auto_now=True)
+    update_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.title
+
+class CompanyInformation(models.Model):
+    name = models.CharField(max_length=255)
+    industry = models.ForeignKey(CompanyIndustry, on_delete=models.SET_NULL, related_name="company", blank=True, null=True)
+    location = models.CharField(max_length=255)
+    level = models.CharField(max_length=255, choices=CompanyLevel, default=CompanyLevel.MEDIUM)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField(max_length=255, blank=True, null=True)
+    career_email = models.EmailField(max_length=255, blank=True, null=True)
+    create_at = models.DateTimeField(auto_now=True)
+    update_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.name
 
